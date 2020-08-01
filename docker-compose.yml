@@ -1,0 +1,31 @@
+version: '3'
+services:
+  api:
+    build: .
+    volumes:
+      - .:/bbs
+    working_dir: "/bbs"
+    tty: true
+    environment:
+      FLASK_APP: "wsgi.py"
+      FLASK_DEBUG: "1"
+    command: "flask run --host=0.0.0.0"
+    depends_on:
+      - redis
+      - db
+    ports:
+      - "5000:5000"
+  db:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    environment:
+      MYSQL_DATABASE: "bbs_dev"
+      MYSQL_ROOT_PASSWORD: "root"
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+  redis:
+    image: redis:3.2
+    expose:
+      - "6379"
