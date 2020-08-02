@@ -15,6 +15,7 @@ class Topic(Model):
     __tablename__ = 'topics'
 
     title = db.Column(db.String(255))
+    image = db.Column(db.String(255))
     description = db.Column(db.String(255))
 
     comments = db.relationship('Comment', back_populates='topic')
