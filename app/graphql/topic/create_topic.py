@@ -15,11 +15,10 @@ from app.models.topic import Topic
 
 
 class CreateTopic(graphene.Mutation):
-
-    topic = graphene.Field(lambda: TopicConnection)
-
     class Arguments:
         input = TopicInput(required=True)
+
+    topic = graphene.Field(lambda: TopicConnection)
 
     def mutate(self, info, input=None):
         topic = Topic(**input)

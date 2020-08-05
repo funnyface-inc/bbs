@@ -13,3 +13,4 @@ import graphene
 class TopicInput(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=False)
+    image = graphene.String(required=False)
